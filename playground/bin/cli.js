@@ -8,5 +8,10 @@ if (!type || !value) {
   process.exit(1);
 }
 
-const result = convert(type, Number(value), from, to);
-console.log(result);
+try {
+  const result = convert(type, Number(value), from, to);
+  console.log(result);
+} catch (error) {
+  console.error(`Error: ${error.message}`);
+  process.exit(1);
+}
