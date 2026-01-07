@@ -11,7 +11,7 @@ const defaults = JSON.parse(
   readFileSync(join(__dirname, "../config/defaults.json"), "utf-8")
 );
 
-function validateNumericValue(value) {
+export function validateNumericValue(value) {
   // Convert string numbers to actual numbers
   const numValue = typeof value === 'string' ? parseFloat(value) : value;
 
