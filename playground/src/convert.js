@@ -23,21 +23,30 @@ function validateNumericValue(value) {
   return numValue;
 }
 
+function roundToPrecision(value, precision) {
+  return Number.parseFloat(value.toFixed(precision));
+}
+
 export function convert(type, value, from, to) {
   // Validate the value parameter first
   const numericValue = validateNumericValue(value);
+  let result;
   switch (type) {
     case "temperature":
-      return temperature.convertTemperature(
+      result = temperature.convertTemperature(
         numericValue,
         from || defaults.temperature.defaultFrom,
         to || defaults.temperature.defaultTo
       );
+      break;
     case "distance":
-      return distance.convertDistance(numericValue, from, to);
+      result = distance.convertDistance(numericValue, from, to);
+      break;
     case "weight":
-      return weight.convertWeight(numericValue, from, to);
+      result = weight.convertWeight(numericValue, from, to);
+      break;
     default:
       throw new Error("Unknown type " + type);
   }
+  return roundToPrecision(result, defaults.precision);
 }
